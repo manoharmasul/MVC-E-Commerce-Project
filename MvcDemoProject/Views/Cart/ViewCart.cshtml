@@ -1,0 +1,124 @@
+﻿@model IEnumerable<MvcDemoProject.Models.ViewCartModel>
+
+@{
+    ViewData["Title"] = "ViewCart";
+}
+
+<h1 class="text-center">My Cart</h1>
+
+<div class="container">
+   
+        
+<p>
+    @* <a href="@Url.Action("AddToCart","Product")" target="_blank">Click Here</a>*@
+    <a asp-action="GetProductsCustomer" asp-controller="Product" class="btn btn-primary mb-3">< Back</a>
+</p>
+@if (ViewBag.y == "?num=-2")
+{
+    <script>
+        alert("Order Placed Successfully ")
+    </script>
+}
+@if (ViewBag.y=="?num=-3")
+{
+    <script>
+        alert("Order Canceled...! ")
+    </script>
+}
+
+
+
+        @foreach (var item in Model)
+        {
+       
+    Random rd = new Random();
+
+    int rand_num = rd.Next(100, 200);
+
+    string xx = "mano";
+    xx = xx + rand_num;
+
+    <div class="row">
+
+
+        @* <div class="col-3">
+    <span class="mb-3 ms-5"> <img src="@Html.DisplayFor(modelItem => item.pimgUrl)" alt="Laptop Image" width="130" height="180"> </span>
+    </div>*@
+
+
+        <div class="col-3">
+
+            @if (item.pimgUrl != null)
+            {
+                string m1, m2, m3;
+                var images = item.pimgUrl.Split(",");
+
+                m1 = images[0];
+                m2 = images[1];
+                m3 = images[2];
+
+
+
+
+                <span class=" m-0 ">  <div id="@xx" class="carousel slide" data-bs-ride="carousel">
+                    <!-- Indicators/dots -->
+                    <div class="carousel-indicators">
+                        <button type="button" data-bs-target="#@xx" data-bs-slide-to="0" class="active"></button>
+                        <button type="button" data-bs-target="#@xx" data-bs-slide-to="1"></button>
+                        <button type="butoon" data-bs-target="#@xx" data-bs-slide-to="2"></button>
+                    </div>
+                    <!-- The slideshow/carousel -->
+                    <div class="carousel-inner">
+                        <div class="carousel-item active">
+                                <img src="@Html.DisplayFor(modelItem => m1)" alt="Laptop Image" width="130" height="180" class="d-block w-100">
+                        </div>
+                        <div class="carousel-item">
+                                <img src="@Html.DisplayFor(modelItem => m2)" alt="Laptop Image" width="130" height="180" class="d-block w-100">
+                        </div>
+                        <div class="carousel-item">
+                                <img src="@Html.DisplayFor(modelItem => m2)" alt="Laptop Image" width="130" height="180" class="d-block w-100">
+                        </div>
+                    </div>
+                    <!-- Left and right controls/icons -->
+                    <button type="button" class="carousel-control-prev" data-bs-target="#@xx" data-bs-slide="prev"> <span class="carousel-control-prev-icon"></span></button>
+                    <button type="button" class="carousel-control-next" data-bs-target="#@xx" data-bs-slide="next">
+                        <span class="carousel-control-next-icon"></span>
+                    </button>
+                </div>
+                </span>
+            }
+        </div>
+            <div class="col-4 ms-2">
+            Model Id: <span class="">  @Html.DisplayFor(modelItem => item.Id)<br> Model name: @Html.DisplayFor(modelItem => item.pName)<br> Price: @Html.DisplayFor(modelItem => item.price)<br> About: <span class="text-center">@Html.DisplayFor(modelItem => item.Specification)</span></span>
+            </div>
+            <div class="col-3 ms-3">
+                                @Html.ActionLink("Buy", // <-- Link text
+                                                  "OrderIdtem",
+                                                       "Order",
+                                                             // <-- Action Method Name
+                                                                     new { id=item.pId}, // <-- Route arguments
+                                                                                new {@class="btn btn-success", data_val="abc"} // <-- htmlArguments
+                                                                                              )|      
+                                                                                              
+                                                                                              
+                            @Html.ActionLink("Delele", // <-- Link text
+                                        "DeleteItem",
+
+                            // <-- Action Method Name
+                            new { id=item.Id}, // <-- Route arguments
+                            new {@class="btn btn-danger", data_val="abc"} // <-- htmlArguments
+                            )
+            </div>
+            <div class="col-3">
+            </div>
+            <hr>
+
+        </div>
+            
+           
+        }
+       
+
+        
+
+  </div>
