@@ -7,14 +7,15 @@
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/MvcDemoProject.styles.css" asp-append-version="true" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
 </head>
-<body class="bg-secondary text-white">
+<body class="text-white" style="background-color:#0E1526;">
     <header>
         <div class="container-fluid ">
-        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-secondary text-white border-bottom box-shadow mb-3">
+        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light  text-white border-bottom box-shadow ">
             <div class="container-fluid">
-                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
+                    <a class="navbar-brand text-white" asp-area="" asp-controller="Home" asp-action="Index"><img src="https://as2.ftcdn.net/v2/jpg/03/65/21/85/1000_F_365218592_LhlZDlqweKhz5CxuLE4CpXJCyUSuLgUX.jpg" alt="profile logo" class="rounded" style="width:40px;height:30px">    Home</a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
                         aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
@@ -48,8 +49,8 @@
                             <li class="nav-item">
                                     <a class="nav-link text-white" asp-area="" asp-controller="Cart" asp-action="ViewCart">View Cart</a>
                             </li>
-                         <li class="nav-item" style="padding-left:300px">
-                                    <a class="navbar-brand" href="#"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSos8WJJwI6qi-oyEqumgt5myV32u4aP3FvUA&usqp=CAU" alt="profile logo" class="rounded-pill" style="width:30px;height:30px">Welcome :@Context.Request.HttpContext.Session.GetString("userName")</a>
+                         <li class="nav-item" style="padding-left:280px">
+                                    <a class="navbar-brand text-white" href="#"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSos8WJJwI6qi-oyEqumgt5myV32u4aP3FvUA&usqp=CAU" alt="profile logo" class="rounded-pill" style="width:30px;height:30px">Welcome :@Context.Request.HttpContext.Session.GetString("userName")</a>
                               </li>
                            
                             <li class="nav-item">
@@ -62,8 +63,8 @@
                             <li class="nav-item">
                                     <a class="nav-link text-white" asp-area="" asp-controller="product" asp-action="GetProductsCustomer">MyShop</a>
                             </li>
-                                  <li class="nav-item" style="padding-left:400px">
-                                    <a class="navbar-brand" href="#"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSos8WJJwI6qi-oyEqumgt5myV32u4aP3FvUA&usqp=CAU" alt="profile logo" class="rounded-pill" style="width:30px;height:30px">Welcome :@Context.Request.HttpContext.Session.GetString("userName")</a>
+                                  <li class="nav-item" style="padding-left:550px">
+                                    <a class="navbar-brand text-white" href="#"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSos8WJJwI6qi-oyEqumgt5myV32u4aP3FvUA&usqp=CAU" alt="profile logo" class="rounded-pill" style="width:30px;height:30px">Welcome :@Context.Request.HttpContext.Session.GetString("userName")</a>
                               </li>
                            @* <li class="nav-item " style="padding-left:350px">
                                 <a class="nav-link text-dark" asp-area="" asp-controller="" asp-action="">Welcome :@Context.Request.HttpContext.Session.GetString("userName")</a>
@@ -74,7 +75,7 @@
                             <li class="nav-item">
                                     <a class="nav-link navbar-brand text-white" asp-area="" asp-controller="Cart" asp-action="ViewCart"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQMiJN8rAUAhXgYYHeLS2Fasmz3PnW8c9PLtQNu8rGsE_5INxnrCjzOOpO_-UnkSUOhFCQ&usqp=CAU" alt="profile logo" class="rounded-pill" style="width:25px;height:25px">View Cart</a>
                             </li>
-                             <li class="nav-item justify-content-end">
+                             <li class="nav-item ">
                                     <a class="nav-link text-white" asp-area="" asp-controller="Order" asp-action="MyOrders">My Orders</a>
                             </li>
                         }
@@ -96,14 +97,14 @@
         </nav>
         </div>
     </header>
-    <div class="container-fluid bg-secondary text-white align-content-md-center">
+    <div class="container-fluid  text-white align-content-md-center">
         <main role="main" class="pb-3">
             @RenderBody()
         </main>
     </div>
 
     <footer class="border-top footer text-muted">
-        <div class="container-fluid bg-secondary text-white ">
+        <div class="container-fluid  text-white ">
             <div class="row" style="height:50%">
                 <div class="col-md-4 mt-0 text-center">
             <li class="">

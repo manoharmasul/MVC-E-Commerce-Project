@@ -5,22 +5,23 @@
 }
 
 <h1 class="text-center">Login</h1>
-<p class="text-center text-warning bg-white">You already have account on myshop.com</p>
+<p class="text-center text-warning bg-dark">You already have account on myshop.com</p>
 <hr />
 
-<div class="container">
-    <div class="row">
-        <div style="height: 200px;"
-             class="col-md-6 offset-md-3">
+<div class="container-fluid">
+    <div class="row justify-content-center">
+        <div class="col-sm-4 border p-2 mt-5">
         <form asp-action="Login">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
-                <label asp-for="userName" class="control-label"></label>
+                    <i class="fa fa-user-circle" aria-hidden="true"></i>
+                    <label asp-for="userName" class="control-label"></label>
                 <input asp-for="userName" class="form-control" />
                 <span asp-validation-for="userName" class="text-danger"></span>
             </div>
            
             <div class="form-group">
+                    <i class="fa fa-eye-slash" aria-hidden="true"></i>
                 <label asp-for="password" class="control-label"></label>
                 <input asp-for="password" class="form-control" />
                 <span asp-validation-for="password" class="text-danger"></span>
@@ -31,8 +32,8 @@
                             <a asp-action="Create" class="btn btn-primary mt-3">Register</a>
                         </div>
                         <div class="col-6"></div>
-                        <div class="col-3" style="padding-left=550px">
-                            <input type="submit" value="Log In" class="btn btn-success mt-3 ms-5" />
+                        <div class="col-3 text-end">
+                            <input type="submit" value="Log In" class="btn btn-success mt-3 " />
                         </div>
 
                     </div>

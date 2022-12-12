@@ -88,7 +88,7 @@
         alert("Added To Cart");
     </script>
 }
-       <div class="container">
+    
            
 @foreach (var item in Model)
 {
@@ -99,7 +99,7 @@
 
                 string xx = "mano";
                 xx = xx + rand_num;
-
+                  <div class="container-fluid">
                 <div class="row">
 
 
@@ -107,8 +107,8 @@
                 <span class="mb-3 ms-5"> <img src="@Html.DisplayFor(modelItem => item.pimgUrl)" alt="Laptop Image" width="130" height="180"> </span>
                 </div>*@
 
-
-                    <div class="col-3">
+              
+                    <div class="col-4 mt-2 mb-2" style="padding-left:100px">
 
                         @if (item.pimgUrl != null)
                         {
@@ -122,7 +122,7 @@
 
 
 
-                            <span class=" ms-5">
+                            <span class=" ">
                                 <div id="@xx" class="carousel slide" data-bs-ride="carousel">
                                     <!-- Indicators/dots -->
                                     <div class="carousel-indicators">
@@ -133,13 +133,13 @@
                                     <!-- The slideshow/carousel -->
                                     <div class="carousel-inner">
                                         <div class="carousel-item active">
-                                            <img src="@Html.DisplayFor(modelItem => m1)" alt="Laptop Image" width="100%" height="180px" class="d-block w-100">
+                                            <img src="@Html.DisplayFor(modelItem => m1)" alt="Laptop Image" width="100%" height="240px" class="d-block w-100">
                                         </div>
                                         <div class="carousel-item">
-                                            <img src="@Html.DisplayFor(modelItem => m2)" alt="Laptop Image" width="100%" height="180px" class="d-block w-100">
+                                            <img src="@Html.DisplayFor(modelItem => m2)" alt="Laptop Image" width="100%" height="240px" class="d-block w-100">
                                         </div>
                                         <div class="carousel-item">
-                                            <img src="@Html.DisplayFor(modelItem => m2)" alt="Laptop Image" width="100%" height="180px" class="d-block w-100">
+                                            <img src="@Html.DisplayFor(modelItem => m2)" alt="Laptop Image" width="100%" height="240px" class="d-block w-100">
                                         </div>
                                     </div>
                                     <!-- Left and right controls/icons -->
@@ -155,22 +155,28 @@
               
 
 
-                    <div class="col-4 mt-2 ms-5">
+                    <div class="col-4 mt-1" style="padding-left:140px">
                         Model Id: <span class="">  @Html.DisplayFor(modelItem => item.Id)<br> Model name: @Html.DisplayFor(modelItem => item.pName)<br> Price: @Html.DisplayFor(modelItem => item.price)<br> About: @Html.DisplayFor(modelItem => item.Specification)</span>
                     </div>
-                    <div class="col-3">
+                    <div class="col-3 mt-3" style="padding-left:100px">
                         @Html.ActionLink("Add To Cart", // <-- Link text
                                                 "AddToCart","Cart",
 
                                                 // <-- Action Method Name
                                                 new { id=item.Id}, // <-- Route arguments
                                                 new {@class="btn btn-warning"} // <-- htmlArguments
-                                                )   |    @Html.ActionLink("Buy", // <-- Link text
+                                                )           
+                                                
+
+
+
+                                                
+                                                @Html.ActionLink("Buy", // <-- Link text
                                                 "OrderIdtem",
                                                 "Order",
                                                 // <-- Action Method Name
                                                 new { id=item.Id}, // <-- Route arguments
-                                                new {@class="btn btn-success", data_val="abc"} // <-- htmlArguments
+                                                new {@class="btn btn-success", data_val="abc"}  // <-- htmlArguments
                                                 )
                     </div>
                     <div class="col-3">
@@ -185,8 +191,8 @@
 
 
           </div> 
+          </div>
 
 
 }
 
-        </div>
