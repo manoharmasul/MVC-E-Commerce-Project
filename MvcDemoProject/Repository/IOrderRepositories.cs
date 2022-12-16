@@ -10,13 +10,15 @@ namespace MvcDemoProject.Repository
         Task CreateOrder(Order order);
         Task<int> UpdateOrder(Order order);
         Task<int> DeleteOrder(int id);
-         Task<int> OrderItem(int id,string custName,int custId);
+        Task<int> OrderItem(int id, string custName, int custId);
         Task<List<MayOrders>> MyOrder(string custName);
-        Task<int> OrderAddress(string shippingAddress, int Qty,int Id);
+        Task<int> OrderAddress(string shippingAddress, int Qty, int Id, int uid);
 
-        
+
 
         // Task<int> NewOrder(int id); 
 
     }
 }
+
+

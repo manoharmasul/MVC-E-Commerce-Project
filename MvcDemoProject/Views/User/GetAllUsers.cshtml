@@ -7,10 +7,10 @@
 <h1>GetAllUsers</h1>
 
 <p>
-    <a asp-action="Create" class="btn btn-primary">Register Now</a>
+    <a asp-action="Create">Create New</a>
 </p>
-<table class="table table-bordered table-striped text-white">
-    <thead class="text-center text-white">
+<table class="table">
+    <thead>
         <tr>
             <th>
                 @Html.DisplayNameFor(model => model.Id)
@@ -46,44 +46,60 @@
         </tr>
     </thead>
     <tbody>
-@foreach (var item in Model) {
-        <tr class="text-center text-white">
-            <td>
-                @Html.DisplayFor(modelItem => item.Id)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.userName)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.userEmail)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.password)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.role)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.createdBy)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.modifiedBy)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.createdDate)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.modifiedDate)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.isDeleted)
-            </td>
-            <td>
-                @Html.ActionLink("Edit", "Edit", new { id=item.Id }) |
-                @Html.ActionLink("Details", "Details", new {  id=item.Id }) |
-                @Html.ActionLink("Delete", "Delete", new {  id=item.Id })
-            </td>
-        </tr>
-}
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Id)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.userName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.userEmail)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.password)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.role)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.createdBy)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.modifiedBy)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.createdDate)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.modifiedDate)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.isDeleted)
+                </td>
+                <td>
+                    @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
+                    @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
+                    @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
+                </td>
+            </tr>
+        }
     </tbody>
 </table>
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -15,7 +15,7 @@ namespace MvcDemoProject.Controllers
         // GET: UserController
         public async Task<ActionResult> GetAllUsers()
         {
-            var userlist=await userRepository.GetAllUsers();    
+            var userlist = await userRepository.GetAllUsers();
 
             return View(userlist);
         }
@@ -23,7 +23,15 @@ namespace MvcDemoProject.Controllers
         // GET: UserController/Details/5
         public async Task<ActionResult> Details(int id)
         {
-            var user=await userRepository.GetById(id);
+            var x = HttpContext.Request.QueryString.Value;
+            if (x != null && x != "")
+            {
+                ViewBag.y = x;
+            }
+
+            var uId = HttpContext.Session.GetString("userId");
+
+            var user = await userRepository.GetById(Int32.Parse(uId));
 
             return View(user);
         }
@@ -36,7 +44,7 @@ namespace MvcDemoProject.Controllers
         public async Task<ActionResult> Login(logUserModel ur)
         {
             var user = await userRepository.UserlogIn(ur);
-            if (user !=null )
+            if (user != null)
             {
                 if (user.password == ur.password)
                 {
@@ -52,7 +60,7 @@ namespace MvcDemoProject.Controllers
                 }
                 else
                     ViewBag.num = 1;
-                    return View();
+                return View();
             }
             else
             {
@@ -65,7 +73,7 @@ namespace MvcDemoProject.Controllers
         public ActionResult Create()
         {
             var x = HttpContext.Request.QueryString.Value;
-           if(x!=null && x!="")
+            if (x != null && x != "")
             {
                 ViewBag.x = -1;
             }
@@ -80,15 +88,15 @@ namespace MvcDemoProject.Controllers
         {
             try
             {
-                var user=await userRepository.AddNewUser(userr);
+                var user = await userRepository.AddNewUser(userr);
                 if (user > 0)
                 {
-                 
+
                     return RedirectToAction(nameof(Login));
                 }
                 else
                     ViewBag.num = 1;
-                    
+
                 return View();
 
             }
@@ -103,7 +111,9 @@ namespace MvcDemoProject.Controllers
         // GET: UserController/Edit/5
         public async Task<ActionResult> Edit(int id)
         {
-            var user=await userRepository.GetById(id);
+
+
+            var user = await userRepository.GetById(id);
 
             return View(user);
         }
@@ -115,10 +125,14 @@ namespace MvcDemoProject.Controllers
         {
             try
             {
+                var uId = HttpContext.Session.GetString("userId");
+                user.Id = Int32.Parse(uId);
+                user.modifiedBy = Int32.Parse(uId);
+
                 var result = await userRepository.UpdateUser(user);
                 if (result > 0)
                 {
-                    return RedirectToAction(nameof(GetAllUsers));
+                    return RedirectToAction(nameof(Details), new { num = -11 });
                 }
                 else
                     return View();
@@ -144,7 +158,7 @@ namespace MvcDemoProject.Controllers
         {
             try
             {
-                var result=await userRepository.DeleteUser(id);
+                var result = await userRepository.DeleteUser(id);
                 if (result > 0)
                 {
                     return RedirectToAction(nameof(GetAllUsers));
@@ -159,7 +173,7 @@ namespace MvcDemoProject.Controllers
         }
         public ActionResult ErrorMasaage()
         {
-           
+
             return View();
         }
         public ActionResult Incorrectdata()
@@ -172,6 +186,55 @@ namespace MvcDemoProject.Controllers
             HttpContext.Session.Clear();
             return RedirectToAction("LogIn");
         }
+        public ActionResult AddMoney()
+        {
 
+            return View();
+        }
+
+        // POST: UserController/Create
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<ActionResult> AddMoney(UsertRegistrationModel userr)
+        {
+            try
+            {
+                var uId = HttpContext.Session.GetString("userId");
+                int Id = Int32.Parse(uId);
+                var user = await userRepository.AddMoney(userr, Id);
+                if (user > 0)
+                {
+
+                    return RedirectToAction(nameof(GetWallet), new { num1 = -11 });
+                }
+                else
+                    ViewBag.num = 1;
+
+                return View();
+
+            }
+            catch
+            {
+                ViewBag.num = 1;
+
+                return View();
+            }
+        }
+
+        public async Task<ActionResult> GetWallet(int id)
+        {
+            var x = HttpContext.Request.QueryString.Value;
+            if (x != null && x != "")
+            {
+                ViewBag.x = x;
+
+            }
+
+            var uId = HttpContext.Session.GetString("userId");
+
+            var user = await userRepository.GetWallet(Int32.Parse(uId));
+
+            return View(user);
+        }
     }
 }

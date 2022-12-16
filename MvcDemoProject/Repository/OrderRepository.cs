@@ -5,7 +5,7 @@ using MvcDemoProject.Models;
 
 namespace MvcDemoProject.Repository
 {
-    public class OrderRepository:IOrderRepositories
+    public class OrderRepository : IOrderRepositories
     {
         private readonly DapperContext context;
 
@@ -13,6 +13,7 @@ namespace MvcDemoProject.Repository
         {
             this.context = context;
         }
+
 
         public async Task CreateOrder(Order order)
         {
@@ -26,7 +27,7 @@ namespace MvcDemoProject.Repository
 
              @createdBy,getdate(),0,@orderStatus)";
             order.orderStatus = "pending";
-            using(var connection=context.CreateConnection())
+            using (var connection = context.CreateConnection())
             {
                 await connection.ExecuteAsync(query, order);
             }
@@ -35,9 +36,9 @@ namespace MvcDemoProject.Repository
         public async Task<int> DeleteOrder(int id)
         {
             var query = @"update tblOrder set modifiedBy=101,modifiedDate=getdate(),isDeleted=1 where Id=@Id";
-            using(var connections=context.CreateConnection())
+            using (var connections = context.CreateConnection())
             {
-               var result= await connections.ExecuteAsync(query,new { Id=id });
+                var result = await connections.ExecuteAsync(query, new { Id = id });
                 return result;
             }
         }
@@ -45,9 +46,9 @@ namespace MvcDemoProject.Repository
         public async Task<Order> GetOrderById(int? id)
         {
             var query = @"select * from tblOrder where Id=@Id and IsDeleted=0";
-            using(var connection=context.CreateConnection())
+            using (var connection = context.CreateConnection())
             {
-                var order=await connection.QueryAsync<Order>(query, new {Id=id});
+                var order = await connection.QueryAsync<Order>(query, new { Id = id });
                 return order.FirstOrDefault();
             }
         }
@@ -56,41 +57,54 @@ namespace MvcDemoProject.Repository
         {
             //custName,pName,Qty,totalAmmount,orderDate,orderStatus
             var query = @"select * from tblOrder where IsDeleted=0 and shippingAddress is not null order by id desc";
-            using (var connection= context.CreateConnection())
+            using (var connection = context.CreateConnection())
             {
-                var orderlist=await connection.QueryAsync<GetOrders>(query);
-                return orderlist;   
+                var orderlist = await connection.QueryAsync<GetOrders>(query);
+                return orderlist;
             }
         }
 
         public async Task<List<MayOrders>> MyOrder(string custName)
         {
             var query = @"select pName,Qty,totalAmmount,orderStatus from tblOrder where custName=@custName and isDeleted=0 and shippingAddress is not null order by Id desc";
-            using(var connection=context.CreateConnection())
+            using (var connection = context.CreateConnection())
             {
-                var orde=await connection.QueryAsync<MayOrders>(query,new {custName=custName});
+                var orde = await connection.QueryAsync<MayOrders>(query, new { custName = custName });
                 return orde.ToList();
             }
         }
 
-        public async Task<int> OrderAddress(string shippingAddress, int Qty, int Id)
+        public async Task<int> OrderAddress(string shippingAddress, int Qty, int Id, int uid)
         {
             var query = "update tblOrder set  shippingAddress=@shippingAddress,Qty=@Qty,totalAmmount=@totalAmmount where Id=@Id and isDeleted=0";
-            using(var connection= context.CreateConnection())
+            using (var connection = context.CreateConnection())
             {
-                var pr = await connection.QuerySingleAsync<double>(@"select price from tblProduct where pName=(select pName from tblOrder where Id=@Id)", new { Id = Id });
-                var totolammount = pr * Qty;
+                var pr = await connection.QuerySingleAsync<double>(@"select totalAmmount from tblOrder where Id=@Id and isDeleted=0 ", new { Id = Id });
+                double totolammount = pr * Qty;
+                double wb = await connection.QuerySingleOrDefaultAsync<double>(@"select wallet from tblUser where Id=@Id", new { Id = uid });
+                if (wb >= totolammount)
+                {
+                    wb -= totolammount;
+                    await connection.ExecuteAsync(@"update tblUser set wallet=@wallet where Id=@Id", new { Id = uid, wallet = wb });
 
-                var add = await connection.ExecuteAsync(query, new { shippingAddress = shippingAddress, Qty = Qty,Id=Id, totalAmmount = totolammount });
-                return add;
+                    var add = await connection.ExecuteAsync(query, new { shippingAddress = shippingAddress, Qty = Qty, Id = Id, totalAmmount = totolammount });
+                    return add;
+                }
+                else
+                {
+                    var result = await connection.ExecuteAsync(@"delete tblOrder where Id=@Id", new { Id = Id });
+
+                    return -4;
+                }
+
             }
         }
 
-        public async Task<int> OrderItem(int id,string custName,int custId)
+        public async Task<int> OrderItem(int id, string custName, int custId)
         {
-            Order item=new Order();
+            Order item = new Order();
             //Id,custName,pName,Qty,totalAmmount,cretedBy,createDate,modifiedBy,modifiedDate,isDeleted,orderStatus
-          
+
 
             var query = @"insert into tblOrder (custName,pName,Qty,totalAmmount,
 
@@ -99,14 +113,14 @@ namespace MvcDemoProject.Repository
             values(@custName,@pName,@Qty,@totalAmmount,
 
              @createdBy,getdate(),0,@orderStatus);SELECT CAST(SCOPE_IDENTITY() as int)";
-            using (var connection= context.CreateConnection())
+            using (var connection = context.CreateConnection())
             {
                 var prod = await connection.QuerySingleOrDefaultAsync<Products>(@"select * from tblProduct where Id=@Id", new { Id = id });
                 item.pName = prod.pName;
                 item.custName = custName;
                 item.totalAmmount = prod.price;
                 item.createdBy = custId;
-                item.orderStatus = "pending";               
+                item.orderStatus = "pending";
                 var result = await connection.QuerySingleAsync<int>(query, item);
                 return result;
             }
@@ -143,9 +157,9 @@ namespace MvcDemoProject.Repository
                         modifiedBy=@modifiedBy
  
                         ,modifiedDate=getdate(),orderStatus=@orderStatus,billingAddress=@billingAddress where isDeleted=0 and Id=@Id";
-            using(var connection= context.CreateConnection())
+            using (var connection = context.CreateConnection())
             {
-                var resutl=await connection.ExecuteAsync(query,order);
+                var resutl = await connection.ExecuteAsync(query, order);
                 return resutl;
 
             }

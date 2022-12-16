@@ -2,7 +2,7 @@
 
 namespace MvcDemoProject.Models
 {
-    public class User:BaseModel
+    public class User : BaseModel
     {
         //Id,userName,userEmail,password,role,createdBy,createdDate,modifiedBy,modifiedDate,isDeleted
         [Key]
@@ -15,6 +15,7 @@ namespace MvcDemoProject.Models
         public string userEmail { get; set; }
         [Required]
         [DataType(DataType.Password)]
+
         public string password { get; set; }
         public string role { get; set; }
     }
@@ -22,7 +23,7 @@ namespace MvcDemoProject.Models
     {
         [Required]
         public string userName { get; set; }
-       
+
         [Required]
         [DataType(DataType.Password)]
         public string password { get; set; }
@@ -30,15 +31,17 @@ namespace MvcDemoProject.Models
     }
     public class UsertRegistrationModel
     {
-       
-            public string userName { get; set; }
-            [Required]
-            [DataType(DataType.EmailAddress)]
-            public string userEmail { get; set; }
-            [Required]
-            [DataType(DataType.Password)]
-            public string password { get; set; }
 
-        
+        public string userName { get; set; }
+        [Required]
+        [DataType(DataType.EmailAddress)]
+        public string userEmail { get; set; }
+        [Required]
+        [DataType(DataType.Password)]
+        public string password { get; set; }
+
+        public double wallet { get; set; }
+
+
     }
 }

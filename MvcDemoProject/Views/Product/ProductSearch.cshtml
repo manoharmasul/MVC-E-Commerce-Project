@@ -6,102 +6,103 @@
 <body>
     <div class="container-fluid mt-3">
 
-       
-@if (ViewBag.num == -1)
-{
-    <script>
-        alert("please enter search  text")
-    </script>
-}
 
-@*<table class="table">
-    <thead>
+        @if (ViewBag.num == -1)
+        {
+            <script>
+                alert("please enter search  text")
+            </script>
+        }
+
+        @*<table class="table">
+        <thead>
         <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.Id)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.pName)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.pimgUrl)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.price)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.createdBy)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.modifiedBy)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.createdDate)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.modifiedDate)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.isDeleted)
-            </th>
-            <th></th>
+        <th>
+        @Html.DisplayNameFor(model => model.Id)
+        </th>
+        <th>
+        @Html.DisplayNameFor(model => model.pName)
+        </th>
+        <th>
+        @Html.DisplayNameFor(model => model.pimgUrl)
+        </th>
+        <th>
+        @Html.DisplayNameFor(model => model.price)
+        </th>
+        <th>
+        @Html.DisplayNameFor(model => model.createdBy)
+        </th>
+        <th>
+        @Html.DisplayNameFor(model => model.modifiedBy)
+        </th>
+        <th>
+        @Html.DisplayNameFor(model => model.createdDate)
+        </th>
+        <th>
+        @Html.DisplayNameFor(model => model.modifiedDate)
+        </th>
+        <th>
+        @Html.DisplayNameFor(model => model.isDeleted)
+        </th>
+        <th></th>
         </tr>
-    </thead>
-    <tbody>
-@foreach (var item in Model) {
+        </thead>
+        <tbody>
+        @foreach (var item in Model) {
         <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Id)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.pName)
-            </td>
-       
-             <td>
-                    <img src="@Html.DisplayFor(modelItem => item.pimgUrl)" alt="Laptop Image" width="70" height="60">
-             </td>
-           
-            <td>
-                @Html.DisplayFor(modelItem => item.price)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.createdBy)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.modifiedBy)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.createdDate)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.modifiedDate)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.isDeleted)
-            </td>
-                <td>
+        <td>
+        @Html.DisplayFor(modelItem => item.Id)
+        </td>
+        <td>
+        @Html.DisplayFor(modelItem => item.pName)
+        </td>
 
-                    @Html.ActionLink("Add To  Cart", // <-- Link text
-                "AddToCart",
+        <td>
+        <img src="@Html.DisplayFor(modelItem => item.pimgUrl)" alt="Laptop Image" width="70" height="60">
+        </td>
 
-                // <-- Action Method Name
-                new { id=item.Id}, // <-- Route arguments
-                new {@class="btn btn-warning", data_val="abc"} // <-- htmlArguments
-                )
+        <td>
+        @Html.DisplayFor(modelItem => item.price)
+        </td>
+        <td>
+        @Html.DisplayFor(modelItem => item.createdBy)
+        </td>
+        <td>
+        @Html.DisplayFor(modelItem => item.modifiedBy)
+        </td>
+        <td>
+        @Html.DisplayFor(modelItem => item.createdDate)
+        </td>
+        <td>
+        @Html.DisplayFor(modelItem => item.modifiedDate)
+        </td>
+        <td>
+        @Html.DisplayFor(modelItem => item.isDeleted)
+        </td>
+        <td>
 
-                </td>
+        @Html.ActionLink("Add To  Cart", // <-- Link text
+        "AddToCart",
+
+        // <-- Action Method Name
+        new { id=item.Id}, // <-- Route arguments
+        new {@class="btn btn-warning", data_val="abc"} // <-- htmlArguments
+        )
+
+        </td>
         </tr>
-}
-    </tbody>
-</table>*@
-<form asp-controller="Product" asp-action="ProductSearch" class="mb-5 ms-5">
-    <p>
+        }
 
-        Search: <input type="text" name="searchtext" placeholder="Enter Search Text" id="demo" class="form-control-sm " />
+        </tbody>
+        </table>*@
+        <form asp-controller="Product" asp-action="ProductSearch" class="mb-5 ms-5">
+            <p>
 
-        <input type="submit" value="Search" class="btn btn-primary " />
-    </p>
-</form>
+                Search: <input type="text" name="searchtext" placeholder="Enter Search Text" id="demo" class="form-control-sm " />
+
+                <input type="submit" value="Search" class="btn btn-primary " />
+            </p>
+        </form>
 
         @if (Model == null)
         {
@@ -115,8 +116,8 @@
         }
         else
         {
-                @foreach (var item in Model)
-                {
+            @foreach (var item in Model)
+            {
                 Random rd = new Random();
 
                 int rand_num = rd.Next(100, 200);
@@ -132,7 +133,7 @@
             </div>*@
 
 
-                    <div class="col-3">
+                    <div class="col-3 m-3">
 
                         @if (item.pimgUrl != null)
                         {
@@ -175,28 +176,29 @@
                             </span>
                         }
                     </div>
-                            <div class="col-4">
-                                     Model Id: <span class="">  @Html.DisplayFor(modelItem => item.Id)<br> Model name: @Html.DisplayFor(modelItem => item.pName)<br> Price: @Html.DisplayFor(modelItem => item.price)<br> About: @Html.DisplayFor(modelItem => item.Specification)</span>
-                            </div>
-                            <div class="col-4">
-                                @Html.ActionLink("Add To Cart", // <-- Link text
-                            "AddToCart",
+                    <div class="col-4 ms-5">
+                        Model Id: <span class="">  @Html.DisplayFor(modelItem => item.Id)<br> Model name: @Html.DisplayFor(modelItem => item.pName)<br> Price: @Html.DisplayFor(modelItem => item.price)<br> About: @Html.DisplayFor(modelItem => item.Specification)</span>
+                    </div>
+                    <div class="col-3 text-end">
+                        @Html.ActionLink("Add To Cart", // <-- Link text
+                "AddToCart",
 
-                            // <-- Action Method Name
-                            new { id=item.Id}, // <-- Route arguments
-                            new {@class="btn btn-warning"} // <-- htmlArguments
-                            )   |    @Html.ActionLink("Buy", // <-- Link text
-                            "OrderIdtem",
-                            "Order",
-                            // <-- Action Method Name
-                            new { id=item.Id}, // <-- Route arguments
-                            new {@class="btn btn-success", data_val="abc"} // <-- htmlArguments
-                            )
-                            </div>
-                            <hr>
-                        </div>
+                // <-- Action Method Name
+                new { id=item.Id}, // <-- Route arguments
+                new {@class="btn btn-warning"} // <-- htmlArguments
+                )         @Html.ActionLink("Buy", // <-- Link text
+                "OrderIdtem",
+                "Order",
+                // <-- Action Method Name
+                new { id=item.Id}, // <-- Route arguments
+                new {@class="btn btn-success ms-2", data_val="abc"} // <-- htmlArguments
+                )
+                    </div>
+                    <div class="col-1"></div>
+                    <hr>
+                </div>
 
-                }
+            }
         }
     </div>
 </body>

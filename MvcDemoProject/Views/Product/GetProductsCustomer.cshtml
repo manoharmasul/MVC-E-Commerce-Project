@@ -1,105 +1,105 @@
 ﻿
 <div class="container-xxl">
-@model IEnumerable<MvcDemoProject.Models.CustomerProduct>
+    @model IEnumerable<MvcDemoProject.Models.CustomerProduct>
 
-@{
-    ViewData["Title"] = "GetProductsCustomer";
-}
+    @{
+        ViewData["Title"] = "GetProductsCustomer";
+    }
 
-<div class="row ms-0">
-     
-<h3 class="container-fluid text-center text-primary bg-warning mt-10 ms-0 me-0">www.myshop.com</h3>
+    <div class="row ms-0">
 
-      
-    <form asp-controller="Product" asp-action="ProductSearch" class="mt-5 mb-5 ms-5">
-        <p>
-
-            Search: <input type="text" name="searchtext" placeholder="Enter Search Text" id="demo" class="form-control-sm " />
-
-            <input type="submit" value="Search" class="btn btn-primary " />
-        </p>
-    </form>
-   
+        <h3 class="container-fluid text-center text-primary bg-warning mt-10 ms-0 me-0">www.myshop.com</h3>
 
 
-@if (ViewBag.num == -3)
-{
-    <script>
-        alert("Added To Cart")
-    </script>
-}
+        <form asp-controller="Product" asp-action="ProductSearch" class="mt-5 mb-5 ms-5">
+            <p>
 
-@*<table class="table">
-    <thead>
+                Search: <input type="text" name="searchtext" placeholder="Enter Search Text" id="demo" class="form-control-sm " />
+
+                <input type="submit" value="Search" class="btn btn-primary " />
+            </p>
+        </form>
+
+
+
+        @if (ViewBag.num == -3)
+        {
+            <script>
+                alert("Added To Cart")
+            </script>
+        }
+
+        @*<table class="table">
+        <thead>
         <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.Id)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.pName)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.pimgUrl)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.price)
-            </th>
-            <th></th>
+        <th>
+        @Html.DisplayNameFor(model => model.Id)
+        </th>
+        <th>
+        @Html.DisplayNameFor(model => model.pName)
+        </th>
+        <th>
+        @Html.DisplayNameFor(model => model.pimgUrl)
+        </th>
+        <th>
+        @Html.DisplayNameFor(model => model.price)
+        </th>
+        <th></th>
         </tr>
-    </thead>
-    <tbody>
-@foreach (var item in Model) {
+        </thead>
+        <tbody>
+        @foreach (var item in Model) {
         <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Id)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.pName)
-            </td>
+        <td>
+        @Html.DisplayFor(modelItem => item.Id)
+        </td>
+        <td>
+        @Html.DisplayFor(modelItem => item.pName)
+        </td>
 
-             <td>
-                        <img src="@Html.DisplayFor(modelItem => item.pimgUrl)" alt="Laptop Image" width="70" height="60">
-            </td>
+        <td>
+        <img src="@Html.DisplayFor(modelItem => item.pimgUrl)" alt="Laptop Image" width="70" height="60">
+        </td>
 
-            <td>
-                @Html.DisplayFor(modelItem => item.price)
-            </td>
-                <td>
+        <td>
+        @Html.DisplayFor(modelItem => item.price)
+        </td>
+        <td>
 
-                    @Html.ActionLink("Add To Cart", // <-- Link text
-                "AddToCart",
+        @Html.ActionLink("Add To Cart", // <-- Link text
+        "AddToCart",
 
-                // <-- Action Method Name
-                new { id=item.Id}, // <-- Route arguments
-                new {@class="btn btn-warning"} // <-- htmlArguments
-                )
+        // <-- Action Method Name
+        new { id=item.Id}, // <-- Route arguments
+        new {@class="btn btn-warning"} // <-- htmlArguments
+        )
 
-                </td>
+        </td>
         </tr>
-}
-    </tbody>
-</table>*@
+        }
+        </tbody>
+        </table>*@
 
 
 
-@if (ViewBag.x == -1)
-{
-    <script>
-        alert("Added To Cart");
-    </script>
-}
-    
-           
-@foreach (var item in Model)
-{
+        @if (ViewBag.x == -1)
+        {
+            <script>
+                alert("Added To Cart");
+            </script>
+        }
 
-                Random rd = new Random();
 
-                int rand_num = rd.Next(100, 200);
+        @foreach (var item in Model)
+        {
 
-                string xx = "mano";
-                xx = xx + rand_num;
-                  <div class="container-fluid">
+            Random rd = new Random();
+
+            int rand_num = rd.Next(100, 200);
+
+            string xx = "mano";
+            xx = xx + rand_num;
+            <div class="container-fluid">
                 <div class="row">
 
 
@@ -107,7 +107,7 @@
                 <span class="mb-3 ms-5"> <img src="@Html.DisplayFor(modelItem => item.pimgUrl)" alt="Laptop Image" width="130" height="180"> </span>
                 </div>*@
 
-              
+
                     <div class="col-4 mt-2 mb-2" style="padding-left:100px">
 
                         @if (item.pimgUrl != null)
@@ -152,7 +152,7 @@
                         }
                     </div>
 
-              
+
 
 
                     <div class="col-4 mt-1" style="padding-left:140px">
@@ -160,39 +160,39 @@
                     </div>
                     <div class="col-3 mt-3" style="padding-left:100px">
                         @Html.ActionLink("Add To Cart", // <-- Link text
-                                                "AddToCart","Cart",
+                    "AddToCart","Cart",
 
-                                                // <-- Action Method Name
-                                                new { id=item.Id}, // <-- Route arguments
-                                                new {@class="btn btn-warning"} // <-- htmlArguments
-                                                )           
-                                                
-
+                    // <-- Action Method Name
+                    new { id=item.Id}, // <-- Route arguments
+                    new {@class="btn btn-warning"} // <-- htmlArguments
+                    )
 
 
-                                                
-                                                @Html.ActionLink("Buy", // <-- Link text
-                                                "OrderIdtem",
-                                                "Order",
-                                                // <-- Action Method Name
-                                                new { id=item.Id}, // <-- Route arguments
-                                                new {@class="btn btn-success", data_val="abc"}  // <-- htmlArguments
-                                                )
+
+
+
+
+                        @Html.ActionLink("Buy", // <-- Link text
+                    "OrderIdtem",
+                    "Order",
+                    // <-- Action Method Name
+                    new { id=item.Id}, // <-- Route arguments
+                    new {@class="btn btn-success ms-2", data_val="abc"}  // <-- htmlArguments
+                    )
                     </div>
                     <div class="col-3">
-
                     </div>
                     <hr>
-                
-       
-            
-  
-               
 
 
-          </div> 
-          </div>
 
 
-}
+
+
+
+                </div>
+            </div>
+
+
+        }
 

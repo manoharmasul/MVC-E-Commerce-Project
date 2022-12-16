@@ -4,6 +4,7 @@ using System.Diagnostics;
 
 namespace MvcDemoProject.Controllers
 {
+
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
@@ -35,6 +36,7 @@ namespace MvcDemoProject.Controllers
         public IActionResult AboutUs()
         {
             return View();
+
         }
     }
 }

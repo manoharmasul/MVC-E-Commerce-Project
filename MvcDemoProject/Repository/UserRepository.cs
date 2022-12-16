@@ -5,12 +5,26 @@ using MvcDemoProject.Repository.Interface;
 
 namespace MvcDemoProject.Repository
 {
-    public class UserRepository:IUserRepository
+    public class UserRepository : IUserRepository
     {
-        private readonly DapperContext _dapperContext;  
+        private readonly DapperContext _dapperContext;
         public UserRepository(DapperContext dapperContext)
         {
             _dapperContext = dapperContext;
+        }
+
+        public async Task<int> AddMoney(UsertRegistrationModel model, int Id)
+        {
+            var query = "update tblUser set wallet=@wallet where Id=@Id and isDeleted=0";
+            using (var connection = _dapperContext.CreateConnection())
+            {
+                var bal = await connection.QuerySingleOrDefaultAsync<double>(@"select wallet from tblUser where Id=@Id", new { Id = Id });
+                model.wallet += bal;
+
+                var result = await connection.ExecuteAsync(query, new { Id = Id, wallet = model.wallet });
+                return result;
+
+            }
         }
 
         public async Task<int> AddNewUser(UsertRegistrationModel userRegistration)
@@ -32,11 +46,11 @@ namespace MvcDemoProject.Repository
                 ur.userEmail = userRegistration.userEmail;
                 ur.password = userRegistration.password;
                 ur.role = "Customer";
-                    result = await connection.QuerySingleAsync<int>(query, ur);
-              
-              
+                result = await connection.QuerySingleAsync<int>(query, ur);
 
-              await connection.ExecuteAsync(@"update tblUser set createdBy=@createdBy where Id=@Id", new { Id = result, createdBy = result });
+
+
+                await connection.ExecuteAsync(@"update tblUser set createdBy=@createdBy where Id=@Id", new { Id = result, createdBy = result });
 
                 return result;
 
@@ -53,15 +67,15 @@ namespace MvcDemoProject.Repository
             var query = @"update tblUser set modifiedBy=201,modifiedDate=getDate(),isDeleted=1 where Id=@Id";
             using (var connection = _dapperContext.CreateConnection())
             {
-                var result = await connection.ExecuteAsync(query, new {Id= id});
-                return result;  
+                var result = await connection.ExecuteAsync(query, new { Id = id });
+                return result;
             }
         }
 
         public async Task<IEnumerable<User>> GetAllUsers()
         {
             var query = @"select * from tblUser where isDeleted=0";
-            using(var connection=_dapperContext.CreateConnection())
+            using (var connection = _dapperContext.CreateConnection())
             {
                 var result = await connection.QueryAsync<User>(query);
                 return result.ToList();
@@ -72,33 +86,50 @@ namespace MvcDemoProject.Repository
         public async Task<User> GetById(int id)
         {
             var query = @"select * from tblUser where Id=@Id and IsDeleted=0";
-            using(var connection=_dapperContext.CreateConnection())
+            using (var connection = _dapperContext.CreateConnection())
             {
-               var result=await connection.QuerySingleAsync<User>(query,new {Id=id});
+                var result = await connection.QuerySingleAsync<User>(query, new { Id = id });
 
                 return result;
+            }
+        }
+
+
+        public async Task<UsertRegistrationModel> GetWallet(int id)
+        {
+            var query = "select wallet from tblUser where Id=@Id";
+            using (var connection = _dapperContext.CreateConnection())
+            {
+                var result = await connection.QueryAsync<UsertRegistrationModel>(query, new { Id = id });
+                return result.FirstOrDefault();
             }
         }
 
         public async Task<int> UpdateUser(User user)
         {
-            var query = @"update tblUser set userName=@userName,userEmail=@userEmail,password=@password,
+            var query = @"update tblUser set userName=@userName,userEmail=@userEmail,
 
-                            role=@role,modifiedBy=@modifiedBy,modifiedDate=@modifiedDate  where Id=@Id and isDeleted=0";
+                          modifiedBy=@modifiedBy,modifiedDate=getdate()  where Id=@Id and isDeleted=0";
             using (var connction = _dapperContext.CreateConnection())
             {
-                var result=await connction.ExecuteAsync(query,user);
+                string password = await connction.QuerySingleOrDefaultAsync<string>(@"select password from tblUser where Id=@Id and isdeleted=0", new { Id = user.Id });
+                if (password == user.password)
+                {
+                    var result = await connction.ExecuteAsync(query, user);
 
-                return result;
+                    return result;
+                }
+                else
+                    return -1;
             }
         }
 
         public async Task<User> UserlogIn(logUserModel userlogin)
         {
-            var query = @"select * from tblUser where userName=@userName and password=@password and userName=@userName and isDeleted=0";
-            using(var connection=_dapperContext.CreateConnection())
+            var query = @"select * from tblUser where userName=@userName and password=@password and isDeleted=0";
+            using (var connection = _dapperContext.CreateConnection())
             {
-                var user=await connection.QueryAsync<User>(query,userlogin);
+                var user = await connection.QueryAsync<User>(query, userlogin);
 
                 return user.FirstOrDefault();
             }

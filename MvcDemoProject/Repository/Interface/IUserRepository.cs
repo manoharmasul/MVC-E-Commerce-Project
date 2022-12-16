@@ -10,6 +10,9 @@ namespace MvcDemoProject.Repository.Interface
         Task<int> UpdateUser(User user);
         Task<int> DeleteUser(int id);
         Task<User> GetById(int id);
-
+        Task<int> AddMoney(UsertRegistrationModel model, int Id);
+        Task<UsertRegistrationModel> GetWallet(int id);
     }
+
+
 }
