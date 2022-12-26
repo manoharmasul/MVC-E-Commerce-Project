@@ -28,6 +28,7 @@ namespace MvcDemoProject.Repository
             }
         }
 
+
         public async Task<int> DeleteProduct(int id, int modifiedBy )
         {
             var query = @"update tblProduct set modifiedBy=@modifiedBy,modifiedDate=getDate(),isDeleted=1 where Id=@Id";
