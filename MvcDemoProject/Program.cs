@@ -1,7 +1,6 @@
 using MvcDemoProject.DBContext;
 using MvcDemoProject.Repository;
 using MvcDemoProject.Repository.Interface;
-
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.

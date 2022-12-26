@@ -8,7 +8,7 @@ namespace MvcDemoProject.Repository.Interface
         Task<int> AddNewProduct(Products product);
         Task<int> DeleteProduct(int id, int modifiedBy);
         Task<int> UpdateProduct(Products products);
-        Task<Products> GetProductById(int id);
+        Task<CustomerProduct> GetProductById(int id);
 
 
        // Task<int> AddToCart(CartModel cartmodel);
@@ -17,6 +17,7 @@ namespace MvcDemoProject.Repository.Interface
 
         Task<List<CustomerProduct>> SearchProduct(string searchtext);
         Task<IEnumerable<CustomerProduct>> GetProductCustomer();
+        Task<List<CustomerProduct>> GetProductByCategory(string searchtext);
     }
      
 }

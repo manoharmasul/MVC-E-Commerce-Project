@@ -44,4 +44,8 @@ namespace MvcDemoProject.Models
 
 
     }
+    public class AddMoneyModel
+    {
+        public double wallet { get; set; }
+    }
 }

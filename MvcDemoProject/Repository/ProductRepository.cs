@@ -48,12 +48,12 @@ namespace MvcDemoProject.Repository
             }
         }
 
-        public async Task<Products> GetProductById(int id)
+        public async Task<CustomerProduct> GetProductById(int id)
         {
             var query = @"select * from tblProduct where Id=@Id and isDeleted=0";
             using (var connection = context.CreateConnection())
             {
-                var prod = await connection.QuerySingleAsync<Products>(query, new { Id = id });
+                var prod = await connection.QuerySingleOrDefaultAsync<CustomerProduct>(query, new { Id = id });
                 return prod;
             }
            
@@ -131,6 +131,19 @@ namespace MvcDemoProject.Repository
                 return result.ToList();
             }
 
+        }
+
+
+
+        public async Task<List<CustomerProduct>> GetProductByCategory(string searchtext)
+        {
+            var query = "select p.Id,p.pName,p.pimgUrl,p.price,p.description,p.Specification,pt.productType from tblProduct p inner join  tblProductType pt on  p.typeId=pt.Id where pt.productType=@searchtext";
+            using (var connections = context.CreateConnection())
+            {
+                var result = await connections.QueryAsync<CustomerProduct>(query, new { searchtext = searchtext });
+
+                return result.ToList();
+            }
         }
     }
 }

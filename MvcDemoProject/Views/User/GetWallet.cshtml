@@ -19,7 +19,8 @@
 
 <div class="container-fluid">
     <div class="row justify-content-center">
-        <div class="col-sm-4 border border-5 border-dark p-2 mt-5 text-center text-dark" style="background-color:floralwhite; mb-5">
+        <div class="col-sm-4 border p-2 mt-5  text-center text-dark" style="background-color:floralwhite; mb-5">
+
 
 
             <hr />
@@ -31,13 +32,11 @@
                 @Html.DisplayFor(model => model.wallet)<br />
 
             </h3>
-
             <hr />
-
             <div class="row ">
                 <div class="col-3">
 
-                    <a asp-action="Index" asp-controller="Home" class="btn btn-primary mt-3 ms-3 ">Back</a>
+                    <a asp-action="Index" asp-controller="Home" class="btn btn-primary mt-3">Back</a>
 
                 </div>
 
@@ -46,7 +45,7 @@
 
                 <div class="col-3 text-end">
 
-                    <a asp-action="AddMoney" class="btn btn-success mt-3 me-3">Add</a>
+                    <a asp-action="AddMoney" class="btn btn-success mt-3">Add</a>
 
                 </div>
 

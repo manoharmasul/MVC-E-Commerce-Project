@@ -14,11 +14,11 @@ namespace MvcDemoProject.Repository
         }
 
         public async Task<int> AddMoney(UsertRegistrationModel model, int Id)
-        {
+       {
             var query = "update tblUser set wallet=@wallet where Id=@Id and isDeleted=0";
             using (var connection = _dapperContext.CreateConnection())
             {
-                var bal = await connection.QuerySingleOrDefaultAsync<double>(@"select wallet from tblUser where Id=@Id", new { Id = Id });
+                var bal = await connection.QuerySingleOrDefaultAsync<double>(@"select IsNull(wallet,0) from tblUser where Id=@Id", new { Id = Id });
                 model.wallet += bal;
 
                 var result = await connection.ExecuteAsync(query, new { Id = Id, wallet = model.wallet });

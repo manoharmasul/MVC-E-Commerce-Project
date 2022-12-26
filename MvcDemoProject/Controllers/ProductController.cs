@@ -25,6 +25,19 @@ namespace MvcDemoProject.Controllers
             var prodlist = await productRepository.GetAllProudct();
             return View(prodlist);
         }
+        public async Task<ActionResult> GetProductsCustomerCard()
+        {
+
+            var prodlist = await productRepository.GetProductCustomer();
+
+            return View(prodlist);
+        }
+        public async Task<ActionResult> DetailsAction(int id)
+        {
+            var prod = await productRepository.GetProductById(id);
+
+            return View(prod);
+        }
         public async Task<ActionResult> GetProductsCustomer()
         {
             var x = HttpContext.Request.QueryString.Value;
@@ -229,7 +242,18 @@ namespace MvcDemoProject.Controllers
             else
                 return View();
         }
-     
+
+        public async Task<ActionResult> ProductCategory(string Searchtext)
+        {
+            var products = await productRepository.GetProductByCategory(Searchtext);
+            if (products.Count() != 0)
+            {
+                return View(products);
+
+            }
+            else
+                return View();
+        }
     }
         
 }
