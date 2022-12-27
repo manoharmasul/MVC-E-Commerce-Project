@@ -17,6 +17,12 @@
         alert("Order Placed Successfully....!")
     </script>
 }
+@if (ViewBag.y == "?num=-4")
+{
+    <script>
+        alert("Something is wrong or please check your wallet balance...!")
+    </script>
+}
 
 
 @if (ViewBag.num == -2)
@@ -88,12 +94,12 @@
                                                                             <div class="col-4">
 
 
-                                                                                                @Html.ActionLink(" Details ", // <-- Link text
+                                                                                                @Html.ActionLink(" Detailss ", // <-- Link text
                                                                                     "DetailsAction",
                                                                                     "Product",
                                                                                     // <-- Action Method Name
                                                                                     new { id=item.pId}, // <-- Route arguments
-                                                                                    new {@class="btn btn-success", data_val="abc"}  // <-- htmlArguments
+                                                                                    new {@class="btn btn-success ms-4", data_val="abc"}  // <-- htmlArguments
                                                                                     )
 
                                                                             </div>

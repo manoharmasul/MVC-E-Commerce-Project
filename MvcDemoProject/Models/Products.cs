@@ -20,7 +20,12 @@
         public string pimgUrl { get; set; }
         public double price { get; set; }
         public string Specification { get; set; }
-
+        public string Description { get; set; }
+        public List<ProductTypeDropDown> prodType { get; set; }
+    }
+    public class ProductTypeDropDown
+    {
+        public string productType { get; set; }
     }
    
 }

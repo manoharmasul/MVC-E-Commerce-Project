@@ -18,6 +18,7 @@ namespace MvcDemoProject.Repository.Interface
         Task<List<CustomerProduct>> SearchProduct(string searchtext);
         Task<IEnumerable<CustomerProduct>> GetProductCustomer();
         Task<List<CustomerProduct>> GetProductByCategory(string searchtext);
+      
     }
      
 }

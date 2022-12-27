@@ -38,6 +38,12 @@ namespace MvcDemoProject.Controllers
 
             return View(prod);
         }
+        public async Task<ActionResult> DetailsActionProduct(int id)
+        {
+            var prod = await productRepository.GetProductById(id);
+
+            return View(prod);
+        }
         public async Task<ActionResult> GetProductsCustomer()
         {
             var x = HttpContext.Request.QueryString.Value;
