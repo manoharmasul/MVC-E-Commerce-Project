@@ -155,7 +155,7 @@ namespace MvcDemoProject.Controllers
                 var result = await _odrepo.DeleteOrder(id);
                 if (result == 1)
                 {
-                    return RedirectToAction("ViewCart", "Cart", new { num = -3 });
+                    return RedirectToAction("GetProductsCustomer", "Product", new { num = -3 });
                 }
                 else
                     return View();

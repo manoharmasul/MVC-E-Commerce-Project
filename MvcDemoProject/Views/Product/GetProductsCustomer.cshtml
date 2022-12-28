@@ -11,6 +11,12 @@
     </script>
 }
 
+@if (ViewBag.num == -3)
+{
+    <script>
+        alert("Added To Cart")
+    </script>
+}
 
 @if (ViewBag.x == -1)
 {
@@ -18,7 +24,12 @@
         alert("Added To Cart");
     </script>
 }
-
+@if (ViewBag.y =="?num=-3")
+{
+    <script>
+        alert("Order Canceled Successfully....!");
+    </script>
+}
 
 <h1 class="text-center">GetProducts Customer Card</h1>
 

@@ -47,7 +47,11 @@ namespace MvcDemoProject.Controllers
         public async Task<ActionResult> GetProductsCustomer()
         {
             var x = HttpContext.Request.QueryString.Value;
-            if (x != null && x != "")
+            if (x =="?num=-3")
+            {
+                ViewBag.y = x;
+            }
+            else if (x != null && x != "")
             {
                 ViewBag.x = -1;
             }
